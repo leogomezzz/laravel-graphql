@@ -1,0 +1,87 @@
+nginx:
+  image: nginx:1.13.12
+  container_name: nginx
+  restart: always
+  ports:
+   - "80:80"
+  volumes:
+    - ./nginx_conf:/etc/nginx/conf.d
+    - ./:/var/www/html
+    -  /usr/bin/ssh:/usr/bin/ssh
+  volumes_from:
+   - php:rw
+  links:
+   - php
+
+php:
+  image: my_image_php:7.2
+  container_name: php
+  restart: always
+  environment:
+   - XDEBUG_CONFIG=remote_host=172.17.0.1
+   - PHP_IDE_CONFIG=serverName=Local
+  volumes:
+    - ./:/var/www/html
+    -  /usr/bin/ssh:/usr/bin/ssh
+    - ../volumes/logsxdebug/:/tmp/xdebug_log #Logs for Xdebug
+  links:
+   - postgres:postgres
+   - redis:redis
+   - mysql:mysql
+
+postgres:
+  image: postgres:10.3
+  container_name: postgres
+  restart: always
+  environment:
+   - POSTGRES_USER=laravel
+   - POSTGRES_PASSWORD=123456A
+  ports:
+   - "5432:5432"
+  volumes:
+   - ../volumes/postgres103:/var/lib/postgresql/data
+
+mysql:
+  image: mysql:5.7
+  container_name: mysql
+  restart: always
+  environment:
+   - MYSQL_ROOT_PASSWORD=123456A
+   - MYSQL_DATABASE=laravel_graphql
+   - MYSQL_USER=laravel
+   - MYSQL_PASSWORD=123456A
+  ports:
+   - "3306:3306"
+  volumes:
+   - ../volumes/mysql57:/var/lib/mysql
+
+redis:
+  image: redis:3.2.11
+  container_name: redis
+  restart: always
+  ports:
+   - "6379:6379"
+
+pgadmin:
+  image: fenglc/pgadmin4
+  container_name: pgadmin
+  restart: always
+  environment:
+    - DEFAULT_USER=laravel
+    - DEFAULT_PASSWORD:123456A
+  ports:
+   - "5050:5050"
+  volumes:
+  - ../volumes/pgadmin/config:/pgadmin/config
+  - ../volumes/pgadmin/storage:/pgadmin/storage
+  links:
+   - postgres:postgres
+
+adminer:
+  image: adminer
+  container_name: adminer
+  restart: always
+  ports:
+   - "8080:8080"
+  links:
+   - mysql:mysql
