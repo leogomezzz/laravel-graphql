@@ -6,55 +6,47 @@ this is sample how to integrating Graphql with laravel, for full documentation y
 
 ## Installation
 
-#### Dependencies:
-* [Laravel 5.x](https://github.com/laravel/laravel)
-* [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors)
-* [rebing/graphql-laravel](https://github.com/rebing/graphql-laravel)
-* [tymon/jwt-auth](https://github.com/tymondesigns/jwt-auth)
-* [noh4ck/graphiql](https://github.com/noh4ck/laravel-graphiql)
+##TODO: format
+
+docker run --rm -v $(pwd):/app -v ~/.ssh:/root/.ssh composer install --ignore-platform-reqs
+sudo chmod 777 -Rv storage
+sudo chmod 777 -Rv bootstrap
+
+cp .env.example .env
+
+docker ps
+
+docker exec -it id_php_container bash
+
+php artisan key:generate
+
+http://localhost:8080/
+Server: mysql
+Username: root
+password: 123456A
+database: laravel_graphql
 
 
-#### Setup Composer.json:
+php artisan migrate
+php artisan db:seed
 
-**1-** Require the package via Composer in your `composer.json`.
-```json
-{
-  "require": {
-    "barryvdh/laravel-cors": "^0.9.2",
-    "rebing/graphql-laravel": "dev-master",
-    "tymon/jwt-auth": "^0.5.11",
-    "noh4ck/graphiql": "dev-master"
-  },
-  "repositories": [
-      {
-          "type": "vcs",
-          "url": "https://github.com/ardani/laravel-graphiql"
-      }
-  ]
-}
-```
 
-**2-** Run Composer to install or update the new requirement.
+Open Postman and import (paste raw text)
 
-```bash
-$ composer install
-```
+curl -X POST \
+  http://localhost/graphql/login \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 2136f022-4fa0-906e-da8d-9718aa1f7fde' \
+  -d '{
+	"email": "leonardo.delfica@gmail.com",
+	"password": "secret"
+}'
 
-**3-** Create file  `.env` and  setting database in `.env`
- 
-**4-** Run artisan migrate and seeder
 
- ```bash
- $ php artisan migrate
- $ php artisan db:seed
- ```
- 
-**5-** Run application
+Select and copy the returned token between ""
 
-```bash
- $ php artisan serve
- ```
- 
- GraphQL : [http://127.0.0.1:8000/graphql/query](http://127.0.0.1:8000/graphql/query)
-
- GraphQL Ui : [http://127.0.0.1:8000/graphql-ui](http://127.0.0.1:8000/graphql-ui)
+Open Altair
+Set Headers
+Authorization
+Bearer tokenabcd
