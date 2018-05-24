@@ -24,6 +24,12 @@ class NewUserMutation extends Mutation
         return GraphQL::type('users');
     }
 
+    public function rules()
+    {
+        $user = new User();
+        return $user->rules();
+    }
+
     public function args()
     {
         return [

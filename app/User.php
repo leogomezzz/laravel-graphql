@@ -27,6 +27,17 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'first_name' => 'required',
+            'last_name' => 'required',
+        ];
+    }
+
     
     public function products()
     {
