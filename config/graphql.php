@@ -9,7 +9,7 @@ use App\GraphQL\Type\MyProfileType;
 use App\GraphQL\Type\ProductImagesType;
 use App\GraphQL\Type\ProductsType;
 use App\GraphQL\Type\UserProfilesType;
-use App\GraphQL\Type\UsersType;
+use App\GraphQL\Type\UserType;
 
 return [
     'prefix' => 'graphql',
@@ -37,7 +37,7 @@ return [
         'product_images' => ProductImagesType::class,
         'products'  => ProductsType::class,
         'user_profiles'  => UserProfilesType::class,
-        'users'  => UsersType::class,
+        'user'  => UserType::class,
         'myprofile'  => MyProfileType::class
     ],
     'error_formatter' => ['\Rebing\GraphQL\GraphQL', 'formatError'],

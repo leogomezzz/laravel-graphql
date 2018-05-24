@@ -38,8 +38,8 @@ class ProductsType extends GraphQLType
                 'type' => Type::listOf(GraphQL::type('product_images')),
                 'description' => 'The images of product',
             ],
-            'users' => [
-                'type' => GraphQL::type('users'),
+            'user' => [
+                'type' => GraphQL::type('user'),
                 'description' => 'The user of product'
             ]
         ];

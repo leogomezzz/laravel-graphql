@@ -17,7 +17,7 @@ class UsersQuery extends Query
 
     public function type()
     {
-        return GraphQL::type('users');
+        return Type::listOf(GraphQL::type('user'));
     }
 
     public function args()
@@ -25,7 +25,7 @@ class UsersQuery extends Query
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::id()
+                'type' => Type::id(),
             ],
             'email' => [
                 'name' => 'email',
@@ -46,8 +46,7 @@ class UsersQuery extends Query
             $user->where('email', $args['email']);
         }
 
-        $user = $user->select($fields->getSelect())
-            ->paginate();
+        $user = $user->select($fields->getSelect())->get();
         return $user;
     }
 }
