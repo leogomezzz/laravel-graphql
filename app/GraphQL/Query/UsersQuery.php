@@ -17,7 +17,7 @@ class UsersQuery extends Query
 
     public function type()
     {
-        return GraphQL::paginate('users');
+        return GraphQL::type('users');
     }
 
     public function args()
@@ -25,7 +25,7 @@ class UsersQuery extends Query
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::int()
+                'type' => Type::id()
             ],
             'email' => [
                 'name' => 'email',

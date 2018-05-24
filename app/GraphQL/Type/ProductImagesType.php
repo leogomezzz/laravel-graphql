@@ -19,7 +19,7 @@ class ProductImagesType extends GraphQLType
     {
         return [
             'product_id' => [
-                'type' => Type::int(),
+                'type' => Type::id(),
                 'description' => 'The product id of product'
             ],
             'image' => [

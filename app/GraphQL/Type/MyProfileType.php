@@ -19,7 +19,7 @@ class MyProfileType extends GraphQLType
     {
         return [
             'id' => [
-                'type' => Type::nonNull(Type::int()),
+                'type' => Type::id(),
                 'description' => 'The id of the user'
             ],
             'email' => [

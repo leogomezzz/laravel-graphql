@@ -11,7 +11,7 @@ class UsersType extends GraphQLType
 {
     protected $attributes = [
         'name' => 'Users',
-        'description' => 'A type',
+        'description' => 'A type that represents users of the system',
         'model' => User::class,
     ];
 
@@ -19,7 +19,7 @@ class UsersType extends GraphQLType
     {
         return [
             'id' => [
-                'type' => Type::nonNull(Type::int()),
+                'type' => Type::id(),
                 'description' => 'The id of the user'
             ],
             'email' => [

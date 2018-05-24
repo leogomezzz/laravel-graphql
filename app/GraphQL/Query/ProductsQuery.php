@@ -25,7 +25,7 @@ class ProductsQuery extends Query
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::string()
+                'type' => Type::id()
             ],
             'title' => [
                 'name' => 'title',

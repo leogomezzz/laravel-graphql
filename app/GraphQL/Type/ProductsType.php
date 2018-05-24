@@ -19,7 +19,7 @@ class ProductsType extends GraphQLType
     {
         return [
             'id' => [
-                'type' => Type::nonNull(Type::string()),
+                'type' => Type::id(),
                 'description' => 'The id of product'
             ],
             'title' => [

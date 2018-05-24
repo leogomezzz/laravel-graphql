@@ -29,7 +29,7 @@ class UpdateUserMutation extends Mutation
         return [
             'id' => [
                 'name' => 'id',
-                'type' => Type::nonNull(Type::int())
+                'type' => Type::nonNull(Type::id())
             ],
             'name' => [
                 'name' => 'name',
