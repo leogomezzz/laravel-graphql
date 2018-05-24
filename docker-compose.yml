@@ -5,7 +5,7 @@ nginx:
   ports:
    - "80:80"
   volumes:
-    - ./nginx_conf:/etc/nginx/conf.d
+    - ./config/docker/nginx_conf:/etc/nginx/conf.d
     - ./:/var/www/html
     -  /usr/bin/ssh:/usr/bin/ssh
   volumes_from:
