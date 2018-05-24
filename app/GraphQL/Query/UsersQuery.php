@@ -36,18 +36,17 @@ class UsersQuery extends Query
 
     public function resolve($root, $args, SelectFields $fields)
     {
-        $where = function ($query) use ($args) {
-            if (isset($args['id'])) {
-                $query->where('id',$args['id']);
-            }
+        $user = User::with(array_keys($fields->getRelations()));
 
-            if (isset($args['email'])) {
-                $query->where('email',$args['email']);
-            }
-        };
-        $user = User::with(array_keys($fields->getRelations()))
-            ->where($where)
-            ->select($fields->getSelect())
+        if (isset($args['id'])) {
+            $user->where('id', $args['id']);
+        }
+
+        if (isset($args['email'])) {
+            $user->where('email', $args['email']);
+        }
+
+        $user = $user->select($fields->getSelect())
             ->paginate();
         return $user;
     }

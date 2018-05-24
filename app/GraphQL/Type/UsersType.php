@@ -24,7 +24,10 @@ class UsersType extends GraphQLType
             ],
             'email' => [
                 'type' => Type::string(),
-                'description' => 'The email of user'
+                'description' => 'The email of user',
+                'resolve' => function($root, $args) {
+                    return strtolower($root->email);
+                }
             ],
             'name' => [
                 'type' => Type::string(),
